@@ -6,11 +6,8 @@ import jwt.spring.security.model.entities.Role;
 import jwt.spring.security.model.mapper.RoleMapper;
 import jwt.spring.security.repository.RoleRepository;
 import jwt.spring.security.service.RoleService;
-import org.hibernate.cache.spi.support.CacheUtils;
-import org.mapstruct.ap.internal.conversion.CurrencyToStringConversion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +20,6 @@ public class RoleServiceImpl implements RoleService {
     RoleRepository roleRepository;
     RoleMapper roleMapper;
 
-    @Autowired
     RoleServiceImpl(RoleRepository roleRepository, RoleMapper roleMapper) {
         this.roleRepository = roleRepository;
         this.roleMapper = roleMapper;
@@ -36,14 +32,14 @@ public class RoleServiceImpl implements RoleService {
             if (roleDto == null) {
                 logger.error("Role Dto can't be null or empty");
                 return CustomResponseEntity.error("Role can't be null or empty");
-            } else if (roleDto.getName().equals("null")) {
+            } else if (roleDto.getName().equals("null") || roleDto.getName() == null) {
                 logger.error("Role can't be null or empty");
                 return CustomResponseEntity.error("Role can't be null or empty");
             }
             Role role = this.roleMapper.dtoToEntity(roleDto);
             logger.info("Role Created Successfully...");
             this.roleRepository.save(role);
-            return new CustomResponseEntity<>("Role Created successfully.");
+            return new CustomResponseEntity(role, "Role Created successfully.");
         } catch (Exception exception) {
             logger.info("An error occurred during creating role!!");
             exception.printStackTrace();
@@ -55,17 +51,17 @@ public class RoleServiceImpl implements RoleService {
     public CustomResponseEntity<List<RoleDto>> fetchAllRoles() {
         try {
             List<Role> getAllRoles = this.roleRepository.findAll();
-            if(getAllRoles.isEmpty()){
+            if (getAllRoles.isEmpty()) {
                 logger.error("Roles are empty!!");
                 return CustomResponseEntity.error("Roles is empty!");
             }
             List<RoleDto> roles = getAllRoles.stream().map(role -> this.roleMapper.entityToDto(role)).toList();
 
-            return new CustomResponseEntity<>(roles,"Role Fetched successfully.");
+            return new CustomResponseEntity<>(roles, "Role Fetched successfully.");
 
         } catch (Exception exception) {
-           logger.error("an error occurred during fetch all roles!");
-           return CustomResponseEntity.error("an error occurred during fetch all roles!");
+            logger.error("an error occurred during fetch all roles!");
+            return CustomResponseEntity.error("an error occurred during fetch all roles!");
         }
     }
 

@@ -36,7 +36,7 @@ public class JwtUtil {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList()));
 
-        SecretKey secretKey = Keys.hmacShaKeyFor(getSecretKey().getBytes()); // Ensure the secret key is a byte array
+        SecretKey secretKey = Keys.hmacShaKeyFor(getSecretKey().getBytes());
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -49,7 +49,7 @@ public class JwtUtil {
 
     public Claims getClaims(String token) {
         try {
-            SecretKey secretKey = Keys.hmacShaKeyFor(getSecretKey().getBytes()); // Extract secret key from config
+            SecretKey secretKey = Keys.hmacShaKeyFor(getSecretKey().getBytes());
 
             return Jwts.parserBuilder()
                     .setSigningKey(secretKey)

@@ -49,7 +49,7 @@ public class AppConfig {
 
     @Bean
     public CustomResponseEntity<?> customResponseEntity() {
-        return new CustomResponseEntity<>(); // or provide necessary parameters to the constructor
+        return new CustomResponseEntity<>();
     }
 
     @Bean
@@ -59,6 +59,7 @@ public class AppConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/v1/auth/**").permitAll()
                         .requestMatchers("/v1/hello/**").permitAll()
+                        .requestMatchers("/v1/role/**").permitAll()
                         .requestMatchers("/v1/contact/**").hasRole("USER")
                         .requestMatchers("/v1/user/**").hasRole("USER")
                         .anyRequest().authenticated()

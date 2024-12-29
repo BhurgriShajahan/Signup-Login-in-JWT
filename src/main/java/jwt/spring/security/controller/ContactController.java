@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import jwt.spring.security.model.CustomResponseEntity;
 import jwt.spring.security.model.dto.ContactDto;
 import jwt.spring.security.service.ContactService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.List;
 public class ContactController {
 
     ContactService contactService;
-    @Autowired
     ContactController(ContactService contactService){
         this.contactService=contactService;
     }

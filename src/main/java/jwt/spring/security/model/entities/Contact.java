@@ -28,8 +28,6 @@ public class Contact {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    //Getters Setters
-
 
     public Long getId() {
         return id;

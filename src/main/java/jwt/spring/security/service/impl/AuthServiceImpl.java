@@ -15,7 +15,6 @@ import jwt.spring.security.repository.UserRepository;
 import jwt.spring.security.service.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,7 +34,6 @@ public class AuthServiceImpl implements AuthService {
     private final JwtUtil jwtUtil;
     private UserSignupMapper userSignupMapper;
 
-    @Autowired
     public AuthServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil, UserSignupMapper userSignupMapper) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;

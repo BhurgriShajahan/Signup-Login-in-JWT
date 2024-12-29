@@ -1,13 +1,10 @@
 package jwt.spring.security.model.dto;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jwt.spring.security.enums.RoleType;
 
 public class RoleDto {
 
     private Long id;
-    @NotBlank(message = "First name is required.")
     private RoleType name;
 
     public Long getId() {

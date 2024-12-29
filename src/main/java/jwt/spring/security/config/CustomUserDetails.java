@@ -12,22 +12,20 @@ public class CustomUserDetails implements UserDetails {
     private String username;
     private String password;
 
-    // Constructor to map the User entity
     public CustomUserDetails(User user) {
-        this.userId = user.getId(); // Assuming User entity has an 'id' field
+        this.userId = user.getId();
         this.username = user.getEmail();
         this.password = user.getPassword();
 
     }
 
-    // Getter for userId
     public Long getUserId() {
         return userId;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null; // Update this if roles/authorities are used in your app
+        return null;
     }
 
     @Override

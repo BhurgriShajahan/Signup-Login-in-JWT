@@ -11,7 +11,6 @@ import jwt.spring.security.service.ContactService;
 import jwt.spring.security.util.AuthenticatedUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -28,7 +27,6 @@ public class ContactServiceImpl implements ContactService {
     private UserRepository userRepository;
     private AuthenticatedUser authenticatedUser;
 
-    @Autowired
     ContactServiceImpl(ContactRepository contactRepository, ContactMapper contactMapper, UserRepository userRepository, AuthenticatedUser authenticatedUser) {
         this.contactRepository = contactRepository;
         this.contactMapper = contactMapper;
@@ -84,6 +82,7 @@ public class ContactServiceImpl implements ContactService {
                     })
                     .toList();
 
+            if (contactDtos.isEmpty()){return new CustomResponseEntity<>(contactDtos,"Contacts is empty!");}
             return new CustomResponseEntity<>(contactDtos, "Contacts fetched successfully.");
 
         } catch (Exception exception) {
