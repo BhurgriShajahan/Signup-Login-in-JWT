@@ -1,0 +1,17 @@
+server:
+  port: 1212
+
+spring:
+  application:
+    name: procedure
+  datasource:
+    url: jdbc:mysql://localhost:3306/jwt
+    username: root
+    password: Admin1234$
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+jwt:
+  secret: afafasfafafasfasfasfafacasdasfasxASFACASDFACASDFASFASFDAFASFASDAADSCSDFADCVSGCFVADXCcadwavfsfarvf
